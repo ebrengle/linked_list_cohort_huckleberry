@@ -10,14 +10,14 @@ class LinkedList
   end
 
   def get(nth_item)
-    raise IndexError if nth_item < 0
+    raise IndexError.new("index can't be negative") if nth_item < 0
     if nth_item == 0
       @first_item.payload
     else
       count = 0
       current_node = @first_item
       while count < nth_item
-        raise IndexError if current_node.nil?
+        raise IndexError.new("doesn't doesn't exist") if current_node.nil?
 
         current_node = current_node.next_item
         count = count + 1
@@ -25,6 +25,7 @@ class LinkedList
       current_node.payload
     end
   end
+
 
   def push(item)
     @indexCounter += 1
