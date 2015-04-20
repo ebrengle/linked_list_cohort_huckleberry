@@ -2,8 +2,11 @@ require_relative 'linked_list_item'
 
 class LinkedList
 
-  def initialize
+  def initialize(*args)
     @indexCounter = -1
+    args.each do |item|
+      push(item)
+    end
   end
 
   def get(nth_item)
@@ -36,6 +39,7 @@ class LinkedList
   end
 
 
+
   #Eliza's Push Method Demo
   #def push(payload)
     #if @first_item.nil?
@@ -53,4 +57,22 @@ class LinkedList
     @indexCounter += 1
   end
 
+  def last
+    unless @last_item.nil?
+      @last_item.payload
+    end
+  end
+
+  def to_s
+    str = "| "
+    current_item = @first_item
+    until current_item.nil?
+      str << current_item.payload
+      punctuation = current_item.last? ? " ":", "
+      str << punctuation
+      current_item = current_item.next_item
+    end
+    str << "|"
+    str
+  end
 end
