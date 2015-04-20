@@ -9,21 +9,47 @@ class LinkedList
     end
   end
 
-  def get(nth_item)
-    raise IndexError.new("index can't be negative") if nth_item < 0
-    if nth_item == 0
-      @first_item.payload
-    else
-      count = 0
-      current_node = @first_item
-      while count < nth_item
-        raise IndexError.new("doesn't doesn't exist") if current_node.nil?
+  #original Get Method
+  #def get(index)
+    #raise IndexError.new("index can't be negative") if index < 0
+    #if index == 0
+      #@first_item.payload
+    #else
+      #count = 0
+      #current_node = @first_item
+      #while count < index
+        #raise IndexError.new("doesn't doesn't exist") if current_node.nil?
 
+        #current_node = current_node.next_item
+        #count = count + 1
+      #end
+      #current_node.payload
+    #end
+  #end
+
+  def get_item(index)
+    raise IndexError if index < 0
+    if index == 0
+      @first_item
+    else
+      current_node = @first_item
+      index.times do
+        raise IndexError if current_node.nil? or current_node.last?
         current_node = current_node.next_item
-        count = count + 1
       end
-      current_node.payload
+      current_node
     end
+  end
+
+  def get(index)
+    get_item(index).payload
+  end
+
+   #Same as the def[] code below
+  #alias [] get
+
+  def [](index)
+    get(index)
   end
 
 
@@ -39,7 +65,14 @@ class LinkedList
 
   end
 
+  def []=(index, payload)
+    previous_item = get(index - 1)
+    next_item = get(index + 1)
+    new_item = LinkedListItem.new(payload)
 
+    previous_item.next_item = new_item
+    new_item.next_item = next_item
+  end
 
   #Eliza's Push Method Demo
   #def push(payload)
