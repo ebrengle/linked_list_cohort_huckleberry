@@ -9,24 +9,6 @@ class LinkedList
     end
   end
 
-  #original Get Method
-  #def get(index)
-    #raise IndexError.new("index can't be negative") if index < 0
-    #if index == 0
-      #@first_item.payload
-    #else
-      #count = 0
-      #current_node = @first_item
-      #while count < index
-        #raise IndexError.new("doesn't doesn't exist") if current_node.nil?
-
-        #current_node = current_node.next_item
-        #count = count + 1
-      #end
-      #current_node.payload
-    #end
-  #end
-
   def get_item(index)
     raise IndexError if index < 0
     if index == 0
@@ -45,12 +27,8 @@ class LinkedList
     get_item(index).payload
   end
 
-   #Same as the def[] code below
-  #alias [] get
+  alias [] get
 
-  def [](index)
-    get(index)
-  end
 
 
   def push(item)
